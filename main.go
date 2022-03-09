@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 const ROLE_LIST = "admin,treasury,lawyer,secretary"
