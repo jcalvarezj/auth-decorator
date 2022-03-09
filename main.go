@@ -80,7 +80,7 @@ func setRoutes(r *chi.Mux) {
 
 	r.With(AllowRoles("admin,lawyer")).With(AuthorizeRoles).Post("/foo/bar", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		w.Write([]byte("<h1>UPDATED!</h1>\n"))
+		w.Write([]byte("<h1>CREATED!</h1>\n"))
 	})
 
 	r.With(AllowRoles("admin,treasury")).With(AuthorizeRoles).Put("/foo/bar", func(w http.ResponseWriter, r *http.Request) {
