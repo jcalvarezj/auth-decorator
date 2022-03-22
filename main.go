@@ -30,7 +30,7 @@ func AuthorizeRoles(next http.Handler) http.Handler {
 		method := r.Method
 
 		if role == "" {
-			w.WriteHeader(http.StatusUnauthorized)
+			w.WriteHeader(http.StatusForbidden)
 			w.Write([]byte("ERROR - There is no role assigned\n"))
 			return
 		}
@@ -38,7 +38,7 @@ func AuthorizeRoles(next http.Handler) http.Handler {
 		if allowedRoles == "all" {
 			valid := strings.Contains(ROLE_LIST, role)
 			if !valid {
-				w.WriteHeader(http.StatusUnauthorized)
+				w.WriteHeader(http.StatusForbidden)
 				w.Write([]byte("ERROR - The current role (" + role + ") is not supported\n"))
 				return
 			}
@@ -50,7 +50,7 @@ func AuthorizeRoles(next http.Handler) http.Handler {
 			if allowed {
 				next.ServeHTTP(w, r)
 			} else {
-				w.WriteHeader(http.StatusUnauthorized)
+				w.WriteHeader(http.StatusForbidden)
 				w.Write([]byte("ERROR - The current role (" + role + ") is not allowed to execute " + resource + " [" + method + "]\n"))
 				return
 			}
